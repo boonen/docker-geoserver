@@ -3,10 +3,10 @@ FROM tomcat:9-jdk11-adoptopenjdk-openj9
 ENV CONFD_VERSION 0.16.0
 ENV GEOSERVER_DOWNLOAD_URL https://downloads.sourceforge.net/project/geoserver/GeoServer
 ENV GEOSERVER_VERSION 2.14.5
-ENV GEOSERVER_PLUGINS control-flow charts excel libjpeg-turbo wps csw vectortiles importer imagemosaic-jdbc sldservice
+ENV GEOSERVER_PLUGINS control-flow charts excel libjpeg-turbo wps csw vectortiles importer imagemosaic-jdbc
 ENV GEOSERVER_ECW_PLUGINS gdal
 ENV GEOSERVER_COMMUNITY_PLUGINS_DOWNLOAD_URL https://build.geoserver.org/geoserver
-ENV GEOSERVER_COMMUNITY_PLUGINS jdbcconfig backup-restore
+ENV GEOSERVER_COMMUNITY_PLUGINS jdbcconfig backup-restore sldservice
 ENV POSTGRESQL_JDBC_VERSION 42.2.6
 ENV HIKARICP_VERSION 3.3.1
 ENV MARLIN_MAJOR_VERSION 0.9.4.2
