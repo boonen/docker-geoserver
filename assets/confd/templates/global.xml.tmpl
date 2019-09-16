@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global>
+  <settings>
+    <id>SettingsInfoImpl-68f6c583:154ca420c47:-8000</id>
+    <contact>
+      <addressCity>{{ getenv "CONTACT_ADDRESS_CITY" "Alexandria" }}</addressCity>
+      <addressCountry>{{ getenv "CONTACT_ADDRESS_COUNTRY" "Egypt" }}</addressCountry>
+      <addressType>{{ getenv "CONTACT_ADDRESS_TYPE" "Work" }}</addressType>
+      <address>{{ getenv "CONTACT_ADDRESS" }}</address>
+      <addressPostalCode>{{ getenv "CONTACT_ADDRESS_POSTAL_CODE" }}</addressPostalCode>
+      <addressState>{{ getenv "CONTACT_ADDRESS_STATE" }}</addressState>
+      <contactEmail>{{ getenv "CONTACT_EMAIL" "claudius.ptolomaeus@gmail.com" }}</contactEmail>
+      <contactFacsimile>{{ getenv "CONTACT_FACSIMILE" }}</contactFacsimile>
+      <contactVoice>{{ getenv "CONTACT_VOICE" }}</contactVoice>
+      <contactOrganization>{{ getenv "CONTACT_ORGANISATION" "The Ancient Geographers" }}</contactOrganization>
+      <contactPerson>{{ getenv "CONTACT_PERSON" "Claudius Ptolomaeus" }}</contactPerson>
+      <contactPosition>{{ getenv "CONTACT_POSITION" "Chief Geographer" }}</contactPosition>
+    </contact>
+    <charset>UTF-8</charset>
+    <proxyBaseUrl>{{ getenv "PROXY_URL" }}</proxyBaseUrl>
+    <numDecimals>8</numDecimals>
+    <onlineResource>http://geoserver.org</onlineResource>
+    <verbose>{{ getenv "VERBOSE" "false" }}</verbose>
+    <verboseExceptions>{{ getenv "VERBOSE_EXCEPTIONS" "false" }}</verboseExceptions>
+    <localWorkspaceIncludesPrefix>false</localWorkspaceIncludesPrefix>
+  </settings>
+  <jai>
+    <allowInterpolation>{{ getenv "JAI_ALLOW_INTERPOLATION" "false" }}</allowInterpolation>
+    <recycling>{{ getenv "JAI_RECYCLING" "false" }}</recycling>
+    <tilePriority>{{ getenv "JAI_TILE_PRIORITY" "5" }}</tilePriority>
+    <tileThreads>{{ getenv "JAI_TILE_THREADS" "7" }}</tileThreads>
+    <memoryCapacity>{{ getenv "JAI_MEMORY_CAPACITY" "0.5" }}</memoryCapacity>
+    <memoryThreshold>{{ getenv "JAI_MEMORY_THRESHOLD" "0.75" }}</memoryThreshold>
+    <imageIOCache>{{ getenv "JAI_IMAGEIO_CACHE" "false" }}</imageIOCache>
+    <pngAcceleration>{{ getenv "JAI_PNG_ACCELERATION" "true" }}</pngAcceleration>
+    <jpegAcceleration>{{ getenv "JAI_JPEG_ACCELERATION" "true" }}</jpegAcceleration>
+    <allowNativeMosaic>false</allowNativeMosaic>
+    <allowNativeWarp>false</allowNativeWarp>
+  </jai>
+  <coverageAccess>
+    <maxPoolSize>10</maxPoolSize>
+    <corePoolSize>5</corePoolSize>
+    <keepAliveTime>30000</keepAliveTime>
+    <queueType>UNBOUNDED</queueType>
+    <imageIOCacheThreshold>10240</imageIOCacheThreshold>
+  </coverageAccess>
+  <updateSequence>152</updateSequence>
+  <featureTypeCacheSize>{{ getenv "FEATURETYPE_CACHE_SIZE" "0" }}</featureTypeCacheSize>
+  <globalServices>{{ getenv "GLOBAL_SERVICES" "true" }}</globalServices>
+  <xmlPostRequestLogBufferSize>1024</xmlPostRequestLogBufferSize>
+  <resourceErrorHandling>SKIP_MISCONFIGURED_LAYERS</resourceErrorHandling>  
+</global>

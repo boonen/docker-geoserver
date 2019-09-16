@@ -1,0 +1,4 @@
+[template]
+src="setenv.sh.tmpl"
+dest="/usr/local/tomcat/bin/setenv.sh"
+mode="0755"

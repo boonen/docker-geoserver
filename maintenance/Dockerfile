@@ -53,16 +53,16 @@ RUN export CURL_OPTS=(-sfSL --retry 3) && \
     apt-get install -y ttf-mscorefonts-installer fontconfig && \
     rm -rf /var/lib/apt/lists/*
 
-# Create data directories
-RUN mkdir -p $GEOSERVER_DATA_DIR/jdbcconfig && mkdir /data
+# Turn off Tomcat access logging
+RUN sed -i 's/<Valve className="org.apache.catalina.valves.AccessLogValve"/\<\!\-\-<Valve className="org.apache.catalina.valves.AccessLogValve/' conf/server.xml && \
+    sed -i 's/pattern="%h %l %u %t &quot;%r&quot; %s %b" \/>/pattern="%h %l %u %t &quot;%r&quot; %s %b" \/>-->/' conf/server.xml
 
 COPY assets/tomcat_logging.properties /usr/local/tomcat/conf/logging.properties
 COPY assets/entrypoint.sh /entrypoint.sh
 COPY assets/confd /etc/confd
+COPY assets/data /var/data/geoserver
 
 VOLUME ["/var/data/geoserver"]
-VOLUME ["/usr/local/share/fonts/"]
-VOLUME ["/data"]
 
 RUN chmod +x /entrypoint.sh
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gwcConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://geowebcache.org/schema/1.8.0"
+  xsi:schemaLocation="http://geowebcache.org/schema/1.8.0 http://geowebcache.org/schema/1.8.0/geowebcache.xsd">
+  <version>1.8.0</version>
+  <backendTimeout>120</backendTimeout>
+  <gridSets>
+    <gridSet>
+      <name>EPSG:28992</name>
+      <srs>
+        <number>28992</number>
+      </srs>
+      <extent>
+        <coords>
+          <double>-285401.92</double>
+          <double>22598.08</double>
+          <double>595401.92</double>
+          <double>903401.92</double>
+        </coords>
+      </extent>
+      <scaleDenominators>
+        <double>12288000</double>
+        <double>6144000</double>
+        <double>3072000</double>
+        <double>1536000</double>
+        <double>768000</double>
+        <double>384000</double>
+        <double>192000</double>
+        <double>96000</double>
+        <double>48000</double>
+        <double>24000</double>
+        <double>12000</double>
+        <double>6000</double>                                                                
+        <double>3000</double>                                                                
+        <double>1500</double>                                                                
+        <double>750</double>                                                                
+        <double>375</double>                                                                                                
+      </scaleDenominators>
+      <tileHeight>256</tileHeight>
+      <tileWidth>256</tileWidth>
+    </gridSet>
+  </gridSets>
+
+  <layers>
+  </layers>
+  
+</gwcConfiguration>

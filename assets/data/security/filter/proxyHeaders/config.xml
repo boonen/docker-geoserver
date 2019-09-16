@@ -1,0 +1,8 @@
+<requestHeaderAuthentication>
+  <id>-7a23463e:15ea914e7d8:-7ffd</id>
+  <name>proxyHeaders</name>
+  <className>org.geoserver.security.filter.GeoServerRequestHeaderAuthenticationFilter</className>
+  <roleSource class="org.geoserver.security.config.PreAuthenticatedUserNameFilterConfig$PreAuthenticatedUserNameRoleSource">Header</roleSource>
+  <rolesHeaderAttribute>cas_role</rolesHeaderAttribute>
+  <principalHeaderAttribute>cas_id</principalHeaderAttribute>
+</requestHeaderAuthentication>

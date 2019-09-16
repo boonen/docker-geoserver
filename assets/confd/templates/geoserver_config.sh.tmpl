@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# cURL commands to optimize Geoserver settings
+#
+# Should be executed once, when the container does not have a setting file already.
+#
+
+# Wait for container to start
+until curl --silent --connect-timeout 1 --output /dev/null http://localhost:8080/
+do
+  echo "...Waiting for Tomcat to start up..."
+  sleep 5
+done
+
+# Change default admin password
+curl -sSL -u admin:geoserver -XPUT -H "Content-type: text/xml" -d "<userPassword><newPassword>{{ getenv "ADMIN_PASSWORD" "geoserver" }}</newPassword></userPassword>" http://localhost:8080/rest/security/self/password
+
+echo "" >> ${CATALINA_HOME}/conf/default_config_set

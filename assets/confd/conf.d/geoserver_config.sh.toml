@@ -1,0 +1,4 @@
+[template]
+src="geoserver_config.sh.tmpl"
+dest="/opt/geoserver_config.sh"
+mode="0755"
