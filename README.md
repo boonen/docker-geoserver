@@ -45,7 +45,7 @@ OpenJDK versions.
 
 Use the following Docker command to start the server:
 
-    docker run --name geoserver -p 8080:8080 boonen/docker-geoserver:latest
+    docker run --name geoserver -p 8080:8080 boonen/geoserver:latest
     
 ### Configuring your container
 
