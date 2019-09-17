@@ -1,5 +1,12 @@
 FROM tomcat:9-jdk11-adoptopenjdk-openj9
 
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
+    apt-get install -y ttf-mscorefonts-installer fontconfig && \
+    apt-get autoremove -y && \ 
+    rm -rf /var/lib/apt/lists/*
+    
 ENV CONFD_VERSION 0.16.0
 ENV GEOSERVER_DOWNLOAD_URL https://downloads.sourceforge.net/project/geoserver/GeoServer
 ENV GEOSERVER_VERSION 2.15.2
@@ -20,8 +27,6 @@ RUN export CURL_OPTS=(-sfSL --retry 3) && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get install -y curl unzip apt-utils debconf && \
-    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
-    apt-get install -y ttf-mscorefonts-installer fontconfig && \    
     curl ${CURL_OPTS[@]} -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
     chmod +x /usr/local/bin/confd && \
     curl ${CURL_OPTS[@]} -o ${CATALINA_HOME}/lib/HikariCP-${HIKARICP_VERSION}.jar https://search.maven.org/remotecontent?filepath=com/zaxxer/HikariCP/${HIKARICP_VERSION}/HikariCP-${HIKARICP_VERSION}.jar && \
