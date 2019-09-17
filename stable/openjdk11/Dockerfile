@@ -1,6 +1,7 @@
 FROM tomcat:9-jdk11-openjdk-slim
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
+    sed -i 's/main/main contrib/' /etc/apt/sources.list && \
     apt-get update && \
     echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
     apt-get install -y ttf-mscorefonts-installer fontconfig && \
@@ -25,7 +26,6 @@ SHELL ["/bin/bash", "-ceux"]
 
 RUN export CURL_OPTS=(-sfSL --retry 3) && \
     export DEBIAN_FRONTEND=noninteractive && \
-    sed -i 's/main/main contrib/' /etc/apt/sources.list && \    
     apt-get update && \
     apt-get install -y curl unzip apt-utils debconf && \
     curl ${CURL_OPTS[@]} -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
@@ -55,10 +55,26 @@ RUN export CURL_OPTS=(-sfSL --retry 3) && \
     dpkg -i libjpeg-turbo.deb && \
     ln -s /opt/libjpeg-turbo/lib64/libjpeg.so.62.0.0 /usr/lib/libjpeg.so.62 && \
     rm libjpeg-turbo.deb && \
-    apt-get purge -y unzip apt-utils && \
+    apt-get purge -y apt-utils && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
+COPY --from=boonen/gdal4geoserver:latest /usr-local-lib.tgz /
+COPY --from=boonen/gdal4geoserver:latest /usr/share/java/gdal.jar /usr/share/java/gdal.jar
+COPY --from=boonen/gdal4geoserver:latest /usr/local/share/gdal/ /usr/local/share/gdal/
+
+RUN export CURL_OPTS="-sSL --retry 3" && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    tar --absolute-names -xf /usr-local-lib.tgz && \
+    rm /usr-local-lib.tgz && \
+    for plugin in "gdal"; do \
+      curl ${CURL_OPTS[@]} -o geoserver-plugin.zip ${GEOSERVER_DOWNLOAD_URL}/${GEOSERVER_VERSION}/extensions/geoserver-${GEOSERVER_VERSION}-${plugin}-plugin.zip; \
+      unzip -q -o geoserver-plugin.zip -d ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/; \
+      rm ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar; \
+      rm geoserver-plugin.zip; \
+    done && \
+    cp /usr/share/java/gdal.jar ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/;
+    
 # Turn off Tomcat access logging
 RUN sed -i 's/<Valve className="org.apache.catalina.valves.AccessLogValve"/\<\!\-\-<Valve className="org.apache.catalina.valves.AccessLogValve/' conf/server.xml && \
     sed -i 's/pattern="%h %l %u %t &quot;%r&quot; %s %b" \/>/pattern="%h %l %u %t &quot;%r&quot; %s %b" \/>-->/' conf/server.xml
