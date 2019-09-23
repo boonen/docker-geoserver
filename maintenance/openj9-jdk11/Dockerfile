@@ -9,7 +9,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     
 ENV CONFD_VERSION 0.16.0
 ENV GEOSERVER_DOWNLOAD_URL https://downloads.sourceforge.net/project/geoserver/GeoServer
-ENV GEOSERVER_VERSION 2.14.5
+ENV GEOSERVER_VERSION 2.15.2
 ENV GEOSERVER_PLUGINS control-flow charts excel libjpeg-turbo wps csw vectortiles importer imagemosaic-jdbc
 ENV GEOSERVER_COMMUNITY_PLUGINS_DOWNLOAD_URL https://build.geoserver.org/geoserver
 ENV GEOSERVER_COMMUNITY_PLUGINS jdbcconfig backup-restore sldservice
