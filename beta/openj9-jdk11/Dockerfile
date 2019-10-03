@@ -69,10 +69,11 @@ RUN export CURL_OPTS="-sSL --retry 3" && \
     for plugin in "gdal"; do \
       curl ${CURL_OPTS[@]} -o geoserver-plugin.zip ${GEOSERVER_DOWNLOAD_URL}/${GEOSERVER_VERSION}/extensions/geoserver-${GEOSERVER_VERSION}-${plugin}-plugin.zip; \
       unzip -q -o geoserver-plugin.zip -d ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/; \
-      rm ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar; \
+      rm -f ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar; \
+      rm -f ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/gdal*.jar; \
+      cp /usr/share/java/gdal.jar ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/; \
       rm geoserver-plugin.zip; \
-    done && \
-    cp /usr/share/java/gdal.jar ${CATALINA_HOME}/webapps/ROOT/WEB-INF/lib/;
+    done
 
 # Turn off Tomcat access logging
 RUN sed -i 's/<Valve className="org.apache.catalina.valves.AccessLogValve"/\<\!\-\-<Valve className="org.apache.catalina.valves.AccessLogValve/' conf/server.xml && \
