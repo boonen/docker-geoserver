@@ -34,7 +34,7 @@
 
 {{- $enableGeoDB := getenv "ENABLE_GEODB" }}
 {{- if eq $enableGeoDB "true" }}
-<Resource name="jdbc/orggeodb"
+<Resource name="jdbc/geodb"
               auth="Container"
               type="javax.sql.DataSource"
               factory="com.zaxxer.hikari.HikariJNDIFactory"
@@ -44,20 +44,6 @@
               password="{{ getenv "POSTGRES_PASSWORD" "secret" }}"
               closeMethod="close"
               minimumIdle="5" maximumPoolSize="25" connectionTimeout="300000" maxLifetime="1800000" />
-{{- end }}
-        
-{{- $enableJndi := getenv "ENABLE_JNDI" }}
-{{- if eq $enableJndi "true" }}              
-    <Resource name="jdbc/jdbcconfig"
-              auth="Container"
-              type="javax.sql.DataSource"
-              factory="com.zaxxer.hikari.HikariJNDIFactory"
-              driverClassName="org.postgresql.Driver"
-              jdbcUrl="jdbc:postgresql://{{ getenv "POSTGRES_HOST" "postgresql" }}:{{ getenv "POSTGRES_PORT" "5432" }}/{{ getenv "POSTGRES_DB" "geodb" }}"
-              username="{{ getenv "JDBCCONFIG_USER" "geoserverconfig" }}"
-              password="{{ getenv "JDBCCONFIG_PASSWORD" "secret" }}"
-              closeMethod="close"
-              minimumIdle="2" maximumPoolSize="10" connectionTimeout="300000" maxLifetime="1800000" />
 {{- end }}
 
 </Context>
