@@ -1,3 +1,0 @@
-[template]
-src="jdbcconfig_init.properties.tmpl"
-dest="/var/data/geoserver/jdbcconfig/jdbcconfig_init.properties"
